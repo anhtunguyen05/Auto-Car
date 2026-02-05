@@ -93,7 +93,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 // Attach user to templates
 app.use(attachUser);
 
-const port = 3000;
+const port = 8000;
 
 app.get('/health', (req, res) => {
   res.status(200).send('OK');
