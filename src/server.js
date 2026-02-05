@@ -95,6 +95,10 @@ app.use(attachUser);
 
 const port = 3000;
 
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
 // Mount auth routes first (no authentication required)
 app.use('/auth', authRoutes);
 
@@ -105,3 +109,4 @@ app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
   console.log(`Dashboard: http://localhost:${port}/`);
 });
+
