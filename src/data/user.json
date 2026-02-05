@@ -1,0 +1,20 @@
+[
+    {
+      "id": "USER001",
+      "name": "Nguyen Van A",
+      "email": "user@example.com",
+      "password": "hashed_password",
+      "role": "CUSTOMER",
+      "phone": "0901234567",
+      "createdAt": "2026-01-01T10:00:00Z"
+    },
+    {
+      "id": "USER002",
+      "name": "Nguyen Van B",
+      "email": "user2@example.com",
+      "password": "hashed_password",
+      "role": "CUSTOMER",
+      "phone": "0911234567",
+      "createdAt": "2026-01-01T10:00:00Z"
+    }
+]

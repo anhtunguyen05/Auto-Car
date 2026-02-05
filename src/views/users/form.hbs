@@ -1,0 +1,103 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">{{#if user}}Edit User{{else}}Add New User{{/if}}</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <a href="/users" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Back to List
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <form method="POST" action="{{#if user}}/users/edit/{{user._id}}{{else}}/users/add{{/if}}" enctype="multipart/form-data">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="name" class="form-label">Full Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{user.name}}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{user.email}}" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="phone" class="form-label">Phone <span class="text-danger">*</span></label>
+                            <input type="tel" class="form-control" id="phone" name="phone" value="{{user.phone}}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="role" class="form-label">Role <span class="text-danger">*</span></label>
+                            <select class="form-select" id="role" name="role" required>
+                                <option value="">Select Role</option>
+                                <option value="ADMIN" {{#if (eq user.role 'ADMIN')}}selected{{/if}}>Admin</option>
+                                <option value="CUSTOMER" {{#if (eq user.role 'CUSTOMER')}}selected{{/if}}>Customer</option>
+                                <option value="STAFF" {{#if (eq user.role 'STAFF')}}selected{{/if}}>Staff</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    {{#unless user}}
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="confirmPassword" class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                        </div>
+                    </div>
+                    {{/unless}}
+                </div>
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save"></i> {{#if user}}Update User{{else}}Add User{{/if}}
+                    </button>
+                    <a href="/users" class="btn btn-secondary">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <i class="bi bi-info-circle"></i> User Information
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    Fill in all required fields marked with <span class="text-danger">*</span> to {{#if user}}update{{else}}create{{/if}} a user account.
+                </p>
+                <h6>Role Descriptions:</h6>
+                <ul class="small">
+                    <li><strong>Admin:</strong> Full system access</li>
+                    <li><strong>Staff:</strong> Manage cars and bookings</li>
+                    <li><strong>Customer:</strong> Book and view rentals</li>
+                </ul>
+            </div>
+        </div>
+
+        {{#if user}}
+        <div class="card mt-3">
+            <div class="card-header">
+                <i class="bi bi-lock"></i> Change Password
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/users/change-password/{{user._id}}">
+                    <div class="mb-3">
+                        <label for="newPassword" class="form-label">New Password</label>
+                        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-warning btn-sm">
+                        <i class="bi bi-key"></i> Change Password
+                    </button>
+                </form>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</div>

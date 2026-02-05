@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">{{#if car}}Edit Car{{else}}Add New Car{{/if}}</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <a href="/cars" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Back to List
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <form method="POST" action="{{#if car}}/cars/edit/{{car._id}}{{else}}/cars/add{{/if}}" enctype="multipart/form-data">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="brand" class="form-label">Brand <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="brand" name="brand" value="{{car.brand}}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="model" class="form-label">Model <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="model" name="model" value="{{car.model}}" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="licensePlate" class="form-label">License Plate <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="licensePlate" name="licensePlate" value="{{car.licensePlate}}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="pricePerDay" class="form-label">Price per Day ($) <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="pricePerDay" name="pricePerDay" value="{{car.pricePerDay}}" min="0" step="0.01" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="status" class="form-label">Status <span class="text-danger">*</span></label>
+                            <select class="form-select" id="status" name="status" required>
+                                <option value="AVAILABLE" {{#if (eq car.status 'AVAILABLE')}}selected{{/if}}>Available</option>
+                                <option value="RENTED" {{#if (eq car.status 'RENTED')}}selected{{/if}}>Rented</option>
+                                <option value="MAINTENANCE" {{#if (eq car.status 'MAINTENANCE')}}selected{{/if}}>Maintenance</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save"></i> {{#if car}}Update Car{{else}}Add Car{{/if}}
+                    </button>
+                    <a href="/cars" class="btn btn-secondary">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <i class="bi bi-info-circle"></i> Information
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    Fill in all required fields marked with <span class="text-danger">*</span> to {{#if car}}update{{else}}add{{/if}} a car.
+                </p>
+                <ul class="list-unstyled">
+                    <li><i class="bi bi-check-circle text-success"></i> Brand and model</li>
+                    <li><i class="bi bi-check-circle text-success"></i> License plate</li>
+                    <li><i class="bi bi-check-circle text-success"></i> Pricing and status</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

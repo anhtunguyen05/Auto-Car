@@ -1,0 +1,64 @@
+<div class="container my-4">
+    <h1 class="mb-4">Browse Available Cars</h1>
+    
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <form class="d-flex" method="GET" action="/user/browse-cars">
+                <input class="form-control me-2" type="search" name="search" placeholder="Search by brand, model..." value="{{search}}">
+                <button class="btn btn-primary" type="submit">
+                    <i class="bi bi-search"></i> Search
+                </button>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <select class="form-select" onchange="window.location.href='/user/browse-cars?sort=' + this.value">
+                <option value="">Sort By</option>
+                <option value="price-asc" {{#if (eq sort 'price-asc')}}selected{{/if}}>Price: Low to High</option>
+                <option value="price-desc" {{#if (eq sort 'price-desc')}}selected{{/if}}>Price: High to Low</option>
+                <option value="year-desc" {{#if (eq sort 'year-desc')}}selected{{/if}}>Year: Newest First</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        {{#each cars}}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">{{this.brand}} {{this.model}}</h5>
+                </div>
+                <div class="card-body">
+                    <p class="mb-2"><strong>Year:</strong> {{this.year}}</p>
+                    <p class="mb-2"><strong>License:</strong> {{this.licensePlate}}</p>
+                    <p class="mb-2"><strong>Type:</strong> {{this.type}}</p>
+                    <p class="mb-2"><strong>Seats:</strong> {{this.seatingCapacity}}</p>
+                    {{#if this.features}}
+                    <p class="mb-2"><strong>Features:</strong> 
+                        {{#each this.features}}
+                        <span class="badge bg-secondary">{{this}}</span>
+                        {{/each}}
+                    </p>
+                    {{/if}}
+                    <hr>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="h4 text-primary mb-0">${{this.pricePerDay}}/day</span>
+                        <span class="badge bg-success">{{this.status}}</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="/user/book-car/{{this._id}}" class="btn btn-primary w-100">
+                        <i class="bi bi-calendar-plus"></i> Book Now
+                    </a>
+                </div>
+            </div>
+        </div>
+        {{else}}
+        <div class="col-12">
+            <div class="alert alert-info text-center">
+                <i class="bi bi-inbox fs-1"></i>
+                <p class="mb-0 mt-2">No cars available at the moment. Please check back later.</p>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

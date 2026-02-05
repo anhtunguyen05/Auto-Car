@@ -1,0 +1,109 @@
+<div class="container mt-5">
+    <h2 class="mb-4">
+        <i class="bi bi-info-circle"></i> Booking Details
+    </h2>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-calendar-check"></i> Booking Information
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Booking ID:</strong>
+                            <p>{{booking._id}}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Status:</strong>
+                            <p>
+                                {{#if (eq booking.status "PENDING")}}
+                                    <span class="badge bg-warning">Pending</span>
+                                {{else if (eq booking.status "CONFIRMED")}}
+                                    <span class="badge bg-success">Confirmed</span>
+                                {{else if (eq booking.status "COMPLETED")}}
+                                    <span class="badge bg-info">Completed</span>
+                                {{else if (eq booking.status "CANCELLED")}}
+                                    <span class="badge bg-danger">Cancelled</span>
+                                {{/if}}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Start Date:</strong>
+                            <p>{{formatDate booking.startDate}}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>End Date:</strong>
+                            <p>{{formatDate booking.endDate}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Total Price:</strong>
+                            <p class="text-success fs-4">${{booking.totalPrice}}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Payment Status:</strong>
+                            <p>
+                                {{#if (eq booking.paymentStatus "PAID")}}
+                                    <span class="badge bg-success">Paid</span>
+                                {{else}}
+                                    <span class="badge bg-warning">Unpaid</span>
+                                {{/if}}
+                            </p>
+                        </div>
+                    </div>
+
+                    {{#if booking.notes}}
+                    <div class="mb-3">
+                        <strong>Notes:</strong>
+                        <p>{{booking.notes}}</p>
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-person"></i> Customer Information
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Name:</strong> {{booking.userId.name}}</p>
+                    <p><strong>Email:</strong> {{booking.userId.email}}</p>
+                    <p><strong>Phone:</strong> {{booking.userId.phone}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-car-front"></i> Car Details
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <h5>{{booking.carId.brand}} {{booking.carId.model}}</h5>
+                    <p><strong>License Plate:</strong> {{booking.carId.licensePlate}}</p>
+                    <p><strong>Price per Day:</strong> ${{booking.carId.pricePerDay}}</p>
+                    <p><strong>Status:</strong> {{booking.carId.status}}</p>
+                </div>
+            </div>
+
+            <div class="d-grid gap-2">
+                <a href="/owner/bookings" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Back to Bookings
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

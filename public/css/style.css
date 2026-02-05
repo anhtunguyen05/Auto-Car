@@ -1,0 +1,211 @@
+
+
+:root {
+    --sidebar-width: 260px;
+}
+
+body {
+    font-size: .875rem;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 48px 0 0;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+}
+
+.sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+}
+
+.sidebar .nav-link.active {
+    color: #0d6efd;
+    background-color: rgba(13, 110, 253, 0.1);
+}
+
+.sidebar .nav-link:hover {
+    color: #0d6efd;
+}
+
+.sidebar .nav-link i {
+    margin-right: 8px;
+}
+
+main {
+    padding-top: 48px;
+}
+
+.card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    margin-bottom: 1.5rem;
+}
+
+.table th {
+    font-weight: 600;
+    background-color: #f8f9fa;
+}
+
+.badge {
+    padding: 0.35em 0.65em;
+    font-weight: 500;
+}
+
+/* Status Colors */
+.bg-statusColor-AVAILABLE,
+.bg-statusColor-ACTIVE {
+    background-color: #198754 !important;
+}
+
+.bg-statusColor-RENTED,
+.bg-statusColor-CONFIRMED {
+    background-color: #ffc107 !important;
+    color: #000 !important;
+}
+
+.bg-statusColor-MAINTENANCE,
+.bg-statusColor-PENDING {
+    background-color: #0dcaf0 !important;
+    color: #000 !important;
+}
+
+.bg-statusColor-CANCELLED {
+    background-color: #dc3545 !important;
+}
+
+.bg-statusColor-COMPLETED {
+    background-color: #6c757d !important;
+}
+
+/* Role Colors */
+.bg-roleColor-ADMIN {
+    background-color: #dc3545 !important;
+}
+
+.bg-roleColor-STAFF {
+    background-color: #0dcaf0 !important;
+    color: #000 !important;
+}
+
+.bg-roleColor-CUSTOMER {
+    background-color: #198754 !important;
+}
+
+/* Dashboard Cards */
+.card-footer {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.card-footer a {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Form Styles */
+.form-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Button Styles */
+.btn {
+    font-weight: 500;
+}
+
+.btn-group-sm > .btn {
+    padding: 0.25rem 0.5rem;
+}
+
+/* Alert Styles */
+.alert {
+    border-left: 4px solid;
+}
+
+.alert-success {
+    border-left-color: #198754;
+}
+
+.alert-danger {
+    border-left-color: #dc3545;
+}
+
+.alert-warning {
+    border-left-color: #ffc107;
+}
+
+.alert-info {
+    border-left-color: #0dcaf0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        position: relative;
+    }
+    
+    main {
+        padding-top: 20px;
+    }
+}
+
+/* Pagination */
+.pagination {
+    margin-top: 2rem;
+}
+
+/* Loading Spinner */
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* Image Placeholder */
+.image-placeholder {
+    background-color: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+}
+
+/* Table Actions */
+.btn-group .btn {
+    border-radius: 0.25rem;
+}
+
+/* Card Headers */
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+}
+
+/* Stats Cards on Dashboard */
+.card.bg-primary .card-footer,
+.card.bg-success .card-footer,
+.card.bg-warning .card-footer,
+.card.bg-info .card-footer {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Sticky Elements */
+.sticky-top {
+    position: sticky;
+    top: 20px;
+    z-index: 1020;
+}

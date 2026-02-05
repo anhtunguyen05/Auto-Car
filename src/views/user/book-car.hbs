@@ -1,0 +1,129 @@
+<div class="container my-4">
+    <h1 class="mb-4">Book Your Car</h1>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-3">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">{{car.brand}} {{car.model}}</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Year:</strong> {{car.year}}</p>
+                            <p><strong>License Plate:</strong> {{car.licensePlate}}</p>
+                            <p><strong>Type:</strong> {{car.type}}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Seats:</strong> {{car.seatingCapacity}}</p>
+                            <p><strong>Fuel Type:</strong> {{car.fuelType}}</p>
+                            <p><strong>Transmission:</strong> {{car.transmission}}</p>
+                        </div>
+                    </div>
+                    {{#if car.features}}
+                    <p><strong>Features:</strong> 
+                        {{#each car.features}}
+                        <span class="badge bg-secondary">{{this}}</span>
+                        {{/each}}
+                    </p>
+                    {{/if}}
+                    <hr>
+                    <div class="alert alert-info">
+                        <h5 class="text-primary">Price: ${{car.pricePerDay}}/day</h5>
+                    </div>
+                </div>
+            </div>
+
+            <form method="POST" action="/user/book-car/{{car._id}}" id="bookingForm">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="bi bi-calendar-range"></i> Booking Details</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="startDate" class="form-label">Start Date <span class="text-danger">*</span></label>
+                                <input type="datetime-local" class="form-control" id="startDate" name="startDate" required onchange="calculateTotal()">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="endDate" class="form-label">End Date <span class="text-danger">*</span></label>
+                                <input type="datetime-local" class="form-control" id="endDate" name="endDate" required onchange="calculateTotal()">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="paymentMethod" class="form-label">Payment Method <span class="text-danger">*</span></label>
+                            <select class="form-select" id="paymentMethod" name="paymentMethod" required>
+                                <option value="">Select Payment Method</option>
+                                <option value="CREDIT_CARD">Credit Card</option>
+                                <option value="DEBIT_CARD">Debit Card</option>
+                                <option value="CASH">Cash</option>
+                                <option value="BANK_TRANSFER">Bank Transfer</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="notes" class="form-label">Additional Notes</label>
+                            <textarea class="form-control" id="notes" name="notes" rows="3" placeholder="Any special requirements..."></textarea>
+                        </div>
+
+                        <input type="hidden" id="pricePerDay" value="{{car.pricePerDay}}">
+                        <input type="hidden" id="totalPriceInput" name="totalPrice" value="0">
+                        <input type="hidden" name="paymentStatus" value="PENDING">
+                        <input type="hidden" name="deposit" value="0">
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="bi bi-check-circle"></i> Confirm Booking
+                        </button>
+                        <a href="/user/browse-cars" class="btn btn-secondary btn-lg">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card sticky-top" style="top: 20px;">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="bi bi-calculator"></i> Price Summary</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Number of Days:</span>
+                        <strong id="numDays">0</strong>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Price per Day:</span>
+                        <strong>${{car.pricePerDay}}</strong>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <h5>Total Price:</h5>
+                        <h5 class="text-primary" id="totalPrice">$0.00</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function calculateTotal() {
+    const startDate = new Date(document.getElementById('startDate').value);
+    const endDate = new Date(document.getElementById('endDate').value);
+    const pricePerDay = parseFloat(document.getElementById('pricePerDay').value) || 0;
+    
+    if (startDate && endDate && endDate > startDate) {
+        const days = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+        const total = days * pricePerDay;
+        
+        document.getElementById('numDays').textContent = days;
+        document.getElementById('totalPrice').textContent = '$' + total.toFixed(2);
+        document.getElementById('totalPriceInput').value = total.toFixed(2);
+    } else {
+        document.getElementById('numDays').textContent = '0';
+        document.getElementById('totalPrice').textContent = '$0.00';
+        document.getElementById('totalPriceInput').value = '0';
+    }
+}
+</script>

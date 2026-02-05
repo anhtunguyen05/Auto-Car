@@ -1,0 +1,22 @@
+[
+  {
+    "id": "BK001",
+    "userId": "USER001",
+    "carId": "CAR001",
+    "startDate": "2026-01-11",
+    "endDate": "2026-01-15",
+    "totalCost": 2000000,
+    "rentalDays": 4,
+    "createdAt": "2026-01-11T09:12:27.199Z"
+  },
+  {
+    "id": "BK002",
+    "userId": "USER001",
+    "carId": "CAR002",
+    "startDate": "2026-01-11",
+    "endDate": "2026-01-15",
+    "totalCost": 2000000,
+    "rentalDays": 4,
+    "createdAt": "2026-01-13T04:35:39.612Z"
+  }
+]

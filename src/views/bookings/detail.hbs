@@ -1,0 +1,151 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Booking Details</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <a href="/bookings" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Back to List
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <!-- Booking Status Card -->
+        <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span><i class="bi bi-info-circle"></i> Booking Status</span>
+                <span class="badge bg-{{statusColor booking.status}} fs-6">{{booking.status}}</span>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Booking ID:</strong> #{{booking._id}}</p>
+                        <p><strong>Created:</strong> {{formatDate booking.createdAt}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Last Updated:</strong> {{formatDate booking.updatedAt}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Information -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="bi bi-person"></i> Customer Information
+            </div>
+            <div class="card-body">
+                <h5>{{booking.userId.name}}</h5>
+                <p class="mb-1"><i class="bi bi-envelope"></i> {{booking.userId.email}}</p>
+                <p class="mb-0"><i class="bi bi-telephone"></i> {{booking.userId.phone}}</p>
+            </div>
+        </div>
+
+        <!-- Car Information -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="bi bi-car-front"></i> Car Information
+            </div>
+            <div class="card-body">
+                <h5>{{booking.carId.brand}} {{booking.carId.model}}</h5>
+                <p class="mb-1"><strong>License Plate:</strong> {{booking.carId.licensePlate}}</p>
+                <p class="mb-1"><strong>Year:</strong> {{booking.carId.year}}</p>
+                <p class="mb-0"><strong>Price per Day:</strong> ${{booking.carId.pricePerDay}}</p>
+            </div>
+        </div>
+
+        <!-- Rental Period -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="bi bi-calendar-range"></i> Rental Period
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Start Date:</strong><br>{{formatDate booking.startDate}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>End Date:</strong><br>{{formatDate booking.endDate}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Information -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="bi bi-credit-card"></i> Payment Information
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Payment Method:</strong> {{booking.paymentMethod}}</p>
+                        <p><strong>Payment Status:</strong> 
+                            <span class="badge bg-{{#if (eq booking.paymentStatus 'PAID')}}success{{else}}warning{{/if}}">
+                                {{booking.paymentStatus}}
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Deposit:</strong> ${{booking.deposit}}</p>
+                        <p><strong>Total Price:</strong> <span class="text-primary fs-5">${{booking.totalPrice}}</span></p>
+                    </div>
+                </div>
+                {{#if booking.notes}}
+                <hr>
+                <p class="mb-0"><strong>Notes:</strong><br>{{booking.notes}}</p>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+
+    <!-- Actions Sidebar -->
+    <div class="col-md-4">
+        <div class="card sticky-top" style="top: 20px;">
+            <div class="card-header">
+                <i class="bi bi-gear"></i> Actions
+            </div>
+            <div class="card-body">
+                {{#if (eq booking.status 'PENDING')}}
+                <form method="POST" action="/bookings/{{booking._id}}/confirm" class="mb-2">
+                    <button type="submit" class="btn btn-success w-100">
+                        <i class="bi bi-check-circle"></i> Confirm Booking
+                    </button>
+                </form>
+                {{/if}}
+
+                {{#if (eq booking.status 'CONFIRMED')}}
+                <form method="POST" action="/bookings/{{booking._id}}/complete" class="mb-2">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-check-all"></i> Complete Booking
+                    </button>
+                </form>
+                {{/if}}
+
+                {{#unless (eq booking.status 'CANCELLED')}}
+                {{#unless (eq booking.status 'COMPLETED')}}
+                <form method="POST" action="/bookings/{{booking._id}}/cancel" onsubmit="return confirm('Are you sure you want to cancel this booking?');">
+                    <button type="submit" class="btn btn-danger w-100">
+                        <i class="bi bi-x-circle"></i> Cancel Booking
+                    </button>
+                </form>
+                {{/unless}}
+                {{/unless}}
+
+                <hr>
+
+                <h6>Booking Flow:</h6>
+                <ul class="list-unstyled small">
+                    <li class="{{#if (eq booking.status 'PENDING')}}text-primary fw-bold{{/if}}">
+                        <i class="bi bi-circle-fill"></i> Pending
+                    </li>
+                    <li class="{{#if (eq booking.status 'CONFIRMED')}}text-success fw-bold{{/if}}">
+                        <i class="bi bi-circle-fill"></i> Confirmed
+                    </li>
+                    <li class="{{#if (eq booking.status 'COMPLETED')}}text-info fw-bold{{/if}}">
+                        <i class="bi bi-circle-fill"></i> Completed
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="container my-4">
+    <h1 class="mb-4">List Your Car</h1>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <form method="POST" action="/user/add-car">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5><i class="bi bi-car-front"></i> Car Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="brand" class="form-label">Brand <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="brand" name="brand" required placeholder="e.g., Toyota, Honda, BMW">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="model" class="form-label">Model <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="model" name="model" required placeholder="e.g., Camry, Civic, X5">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="licensePlate" class="form-label">License Plate <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="licensePlate" name="licensePlate" required placeholder="e.g., ABC-1234">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="pricePerDay" class="form-label">Price per Day ($) <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="pricePerDay" name="pricePerDay" min="1" step="0.01" required placeholder="e.g., 50.00">
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle"></i> Your car will be listed immediately and available for rent.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="bi bi-check-circle"></i> List My Car
+                        </button>
+                        <a href="/user" class="btn btn-secondary btn-lg">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0"><i class="bi bi-info-circle"></i> Information</h5>
+                </div>
+                <div class="card-body">
+                    <h6>Benefits of Listing Your Car:</h6>
+                    <ul class="small">
+                        <li>Earn passive income</li>
+                        <li>Set your own pricing</li>
+                        <li>Flexible scheduling</li>
+                        <li>Insurance coverage included</li>
+                    </ul>
+                    
+                    <hr>
+                    
+                    <h6>Requirements:</h6>
+                    <ul class="small">
+                        <li>Valid vehicle registration</li>
+                        <li>Car must be in good condition</li>
+                        <li>Valid insurance</li>
+                        <li>Clean driving record</li>
+                    </ul>
+
+                    <hr>
+
+                    <h6>What you need to provide:</h6>
+                    <ul class="small">
+                        <li>Car brand and model</li>
+                        <li>License plate number</li>
+                        <li>Rental price per day</li>
+                    </ul>
+                    <p class="small text-success mb-0">
+                        <i class="bi bi-check-circle"></i> Your car will be available immediately after submission!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

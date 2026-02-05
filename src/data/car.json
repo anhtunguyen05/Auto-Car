@@ -1,0 +1,35 @@
+[
+  {
+    "id": "CAR001",
+    "ownerId": "USER002",
+    "brand": "Toyota",
+    "model": "Camry",
+    "licensePlate": "30A-12345",
+    "pricePerDay": 500000,
+    "status": "AVAILABLE",
+    "approved": true,
+    "createdAt": "2026-01-01T09:00:00Z"
+  },
+  {
+    "id": "CAR002",
+    "ownerId": "USER002",
+    "brand": "Honda",
+    "model": "Civic",
+    "licensePlate": "30A-12346",
+    "pricePerDay": 500000,
+    "status": "AVAILABLE",
+    "approved": true,
+    "createdAt": "2026-01-01T09:00:00Z"
+  },
+  {
+    "id": "CAR003",
+    "ownerId": "USER002",
+    "brand": "Mazda",
+    "model": "3",
+    "licensePlate": "30A-12347",
+    "pricePerDay": 500000,
+    "status": "AVAILABLE",
+    "approved": true,
+    "createdAt": "2026-01-01T09:00:00Z"
+  }
+]

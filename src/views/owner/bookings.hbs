@@ -1,0 +1,60 @@
+<div class="container mt-5">
+    <h2 class="mb-4">
+        <i class="bi bi-calendar-check"></i> Bookings for My Cars
+    </h2>
+
+    {{#if bookings.length}}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Car</th>
+                        <th>Customer</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Total Price</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each bookings}}
+                    <tr>
+                        <td>
+                            <strong>{{this.carId.brand}} {{this.carId.model}}</strong><br>
+                            <small class="text-muted">{{this.carId.licensePlate}}</small>
+                        </td>
+                        <td>
+                            {{this.userId.name}}<br>
+                            <small class="text-muted">{{this.userId.email}}</small>
+                        </td>
+                        <td>{{formatDate this.startDate}}</td>
+                        <td>{{formatDate this.endDate}}</td>
+                        <td>${{this.totalPrice}}</td>
+                        <td>
+                            {{#if (eq this.status "PENDING")}}
+                                <span class="badge bg-warning">Pending</span>
+                            {{else if (eq this.status "CONFIRMED")}}
+                                <span class="badge bg-success">Confirmed</span>
+                            {{else if (eq this.status "COMPLETED")}}
+                                <span class="badge bg-info">Completed</span>
+                            {{else if (eq this.status "CANCELLED")}}
+                                <span class="badge bg-danger">Cancelled</span>
+                            {{/if}}
+                        </td>
+                        <td>
+                            <a href="/owner/bookings/{{this._id}}" class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-eye"></i> View
+                            </a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    {{else}}
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> No bookings found for your cars yet.
+        </div>
+    {{/if}}
+</div>
